@@ -139,5 +139,7 @@
     Log file will no longer be a part of this project
     Initializer list must be reallocated to the boot.py file
     All loop sequences are in main.py
+    
+![alt text](https://github.com/inhouseproduce/germinator-esp8266/blob/master/ElectricalScheme.jpg)
 
 See release for latest files
