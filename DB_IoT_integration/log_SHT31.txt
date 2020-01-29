@@ -1,0 +1,9 @@
+Temp Max: 35.0, Temp Min: 30.0
+Humidity Max: 100.0, Humidity Min: 95.0
+---
+Temperature (in Celsius): 22.7809, Previous Temp: 22.797
+Heater On
+-
+Humidity: 64.4755, Previous Humidity: 64.416
+Humidifier On
+---

@@ -1,0 +1,69 @@
+Temp Max: 35.0, Temp Min: 30.0
+Humidity Max: 100.0, Humidity Min: 95.0
+---
+Temperature (in Celsius): 22.2736, Previous Temp: 22.2736
+Heater On
+-
+Humidity: 52.61, Previous Humidity: 52.578
+Humidifier On
+---
+Temperature (in Celsius): 22.2736, Previous Temp: 22.2736
+Heater On
+-
+Humidity: 52.5871, Previous Humidity: 52.61
+Humidifier On
+---
+Temperature (in Celsius): 22.2602, Previous Temp: 22.2736
+Heater On
+-
+Humidity: 52.5673, Previous Humidity: 52.5871
+Humidifier On
+---
+Temperature (in Celsius): 22.2736, Previous Temp: 22.2602
+Heater On
+-
+Humidity: 52.61, Previous Humidity: 52.5673
+Humidifier On
+---
+Temperature (in Celsius): 22.2869, Previous Temp: 22.2736
+Heater On
+-
+Humidity: 52.581, Previous Humidity: 52.61
+Humidifier On
+---
+Temperature (in Celsius): 22.2602, Previous Temp: 22.2869
+Heater On
+-
+Humidity: 52.5902, Previous Humidity: 52.581
+Humidifier On
+---
+Temperature (in Celsius): 22.2602, Previous Temp: 22.2602
+Heater On
+-
+Humidity: 52.6497, Previous Humidity: 52.5902
+Humidifier On
+---
+Temperature (in Celsius): 22.2602, Previous Temp: 22.2602
+Heater On
+-
+Humidity: 52.5871, Previous Humidity: 52.6497
+Humidifier On
+---
+Temperature (in Celsius): 22.2602, Previous Temp: 22.2602
+Heater On
+-
+Humidity: 52.5643, Previous Humidity: 52.5871
+Humidifier On
+---
+Temperature (in Celsius): 22.2736, Previous Temp: 22.2602
+Heater On
+-
+Humidity: 52.5673, Previous Humidity: 52.5643
+Humidifier On
+---
+Temperature (in Celsius): 22.2736, Previous Temp: 22.2736
+Heater On
+-
+Humidity: 52.6009, Previous Humidity: 52.5673
+Humidifier On
+---

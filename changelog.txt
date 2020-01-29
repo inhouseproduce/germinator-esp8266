@@ -1,0 +1,37 @@
+2020-01-15 Nathan Tjoar <nathan.tjoar@gmail.com>
+     
+            * main.py: Pushed beta code to test output 
+            values of temperature sensor
+    
+            * boot.py: Running and initializing pins to 
+            see changes in data
+     
+2020-01-16 Nathan Tjoar <nathan.tjoar@gmail.com>
+
+        * main.py: Updated logic and error vals in code
+
+2020-01-20 Nathan Tjoar <nathan.tjoar@gmail.com>
+
+        * main.py: Have code push values and data to MQTT 
+        connection
+        * Germinator-8266.cert.der: Formatted certificate
+        * Germinator-8266.key.der: Formatted private key
+        * Germinator-8266.private.key: Private key for AWS IoT
+        communications
+        * Germinator-8266.cert.pem: Certifacte for AWS IoT
+        communications
+
+2020-01-27 Nathan Tjoar <nathan.tjoar@gmail.com>
+
+        * main.py: Have code push values and data to database
+        * boot.py: Have initializing to database as well as pin 
+        initialization
+
+2020-01-29 Nathan Tjoar <nathan.tjoar@gmail.com>
+
+        * main.py: Added exception and error handling for the 
+	board
+        * boot.py: Fix initialization repeat and added hard file
+	to the ESP8266
+
+
