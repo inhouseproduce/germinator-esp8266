@@ -10,12 +10,12 @@ i = machine.I2C(sda=machine.Pin(5), scl=machine.Pin(4))
 s = sht31.SHT31(i)
 
 # Temperature Vals (TRUE)
- tempLimit = 20.56
- tMax = 21.667
+tempLimit = 20.56
+tMax = 21.667
 
 # Humidity Vals (TRUE)
- humidLimit = 47.0
- hMax = 50.0
+humidLimit = 47.0
+hMax = 50.0
 
 # # Temperature Vals (FALSE)
 # tempLimit = 30.0
