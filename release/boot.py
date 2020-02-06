@@ -36,13 +36,13 @@ KEY_FILE = "Preux.key.der"
 MQTT_CLIENT_ID = "basicPubSub"
 MQTT_PORT = 8883
 
-#if you change the topic make sure update AWS policy
-MQTT_TOPIC = "sdk/test/Python"
+#topic AWS policy
+MQTT_TOPIC = "germinator/inHouse"
 
 #Change the following three settings to match your environment
 MQTT_HOST = "a2kteabg9as7b1-ats.iot.us-west-1.amazonaws.com"
-WIFI_SSID = "TP-Link_33C4"
-WIFI_PW = "nasturtium"
+WIFI_SSID = "Ntjoar"
+WIFI_PW = "osna101295"
 
 mqtt_client = None
 
@@ -77,21 +77,6 @@ def connect_mqtt():
         raise
 
 def connect_wifi(ssid, pw):
-    # import network
-    # wlan = network.WLAN(network.STA_IF)
-    
-    # if(wlan.isconnected()):
-    #     wlan.disconnect()  
-    # # wlan.active(True)
-    # nets = wlan.scan()
-    
-    # if not wlan.isconnected():
-
-    #     wlan.active(True)
-    #     wlan.connect(WIFI_SSID, WIFI_PW)
-    #     while not wlan.isconnected():
-    #         pass
-    # print("connected:", wlan.ifconfig())
     import network
     wlan = network.WLAN(network.STA_IF)
     wlan.active(True)

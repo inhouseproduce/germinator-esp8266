@@ -34,4 +34,10 @@
         * boot.py: Fix initialization repeat and added hard file
 	to the ESP8266
 
+2020-02-06 Nathan Tjoar <nathan.tjoar@gmail.com>
+
+        * main.py: Added additional exception and error handling 
+	for the board
+	* boot.py: Cleaned and removed unnecessary code. 
+
 

@@ -69,8 +69,8 @@
         ampy -p /dev/ttyUSB0 put xxxxxxxx.cert.pem
         ampy -p /dev/ttyUSB0 put xxxxxxxx.private.key 
     On ESP8266, the following extra commands are needed:
-        openssl x509 -in xxxxxxxx.cert.pem -out xxxxxxxx.cert.der -outform DER
-        openssl rsa -in xxxxxxxx.private.key -out xxxxxxxx.key.der -outform DER
+        openssl x509 -in Preux.cert.pem -out inHouse.cert.der -outform DER
+        openssl rsa -in Preux.private.key -out Preux.key.der -outform DER
         ampy -p /dev/ttyUSB0 put main.py
         ampy -p /dev/ttyUSB0 put xxxxxxxx.cert.der
         ampy -p /dev/ttyUSB0 put xxxxxxxx.key.der 
@@ -139,7 +139,12 @@
     Log file will no longer be a part of this project
     Initializer list must be reallocated to the boot.py file
     All loop sequences are in main.py
-    
-![alt text](https://github.com/inhouseproduce/germinator-esp8266/blob/master/ElectricalScheme.jpg)
+
+### AWS Limitation Notes
+    Testing was done on mobile hotspot
+    Double check all constraints
+    Edit only constraint values, wifi connection, and MQTT topic
+
+### Server Constraint Development
 
 See release for latest files
