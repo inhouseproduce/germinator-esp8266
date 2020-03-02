@@ -69,8 +69,8 @@
         ampy -p /dev/ttyUSB0 put xxxxxxxx.cert.pem
         ampy -p /dev/ttyUSB0 put xxxxxxxx.private.key 
     On ESP8266, the following extra commands are needed:
-        openssl x509 -in Preux.cert.pem -out inHouse.cert.der -outform DER
-        openssl rsa -in Preux.private.key -out Preux.key.der -outform DER
+        openssl x509 -in Vita.cert.pem -out Vita.cert.der -outform DER
+        openssl rsa -in Vita.private.key -out Vita.key.der -outform DER
         ampy -p /dev/ttyUSB0 put main.py
         ampy -p /dev/ttyUSB0 put xxxxxxxx.cert.der
         ampy -p /dev/ttyUSB0 put xxxxxxxx.key.der 
@@ -145,6 +145,8 @@
     Double check all constraints
     Edit only constraint values, wifi connection, and MQTT topic
 
-### Server Constraint Development
+### AWS RDS Connection
+    This connection was simply made by porting MQTT to S3
+    Updates made logged in changelog.txt
 
 See release for latest files
