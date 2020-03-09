@@ -45,6 +45,9 @@ MQTT_TOPIC = "germinator/inHouse"
 MQTT_HOST = "a2kteabg9as7b1-ats.iot.us-west-1.amazonaws.com"
 WIFI_SSID = "inHouse_24GHz"
 WIFI_PW = "P@$$word"
+addr = 'http://localhost'
+port = 8081
+endpoint = 'test'
 
 mqtt_client = None
 
@@ -84,7 +87,7 @@ def connect_wifi(ssid, pw):
     wlan.active(True)
     if not wlan.isconnected():
         print('connecting to network...')
-        wlan.connect(WIFI_SSID, WIFI_PW)
+        wlan.connect(ssid, pw)
         while not wlan.isconnected():
             pass
     print('network config:', wlan.ifconfig())

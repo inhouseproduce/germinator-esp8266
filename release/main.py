@@ -1,4 +1,5 @@
 import time
+import uuid
 import os
 
 # Failover Limit (TRUE)
@@ -28,8 +29,54 @@ statHum = "Off"
 # Iterators
 iter = 1
 MAXWRITE = 1000000
+min_heat_off = 0
+min_humi_off = 0
 
-while True:
+utc = -8
+
+while True: 
+    # UUID and TimeDate
+    postId = str(uuid.uuid4())
+    dateTime = rtc.datetime()
+    year = str(dateTime[0])
+    month = str(dateTime[1])
+    if len(month) == 1:
+        month = '0' + month
+    date = str(dateTime[2])
+    if len(date) == 1:
+        date = '0' + date
+    weekDay = 'M'
+    if dateTime[3] == 0:
+        weekDay = 'M'
+    elif dateTime[3] == 1:
+        weekDay = 'T'
+    elif dateTime[3] == 2:
+        weekDay = 'W'
+    elif dateTime[3] == 3:
+        weekDay = 'R'
+    elif dateTime[3] == 4:
+        weekDay = 'F'
+    elif dateTime[3] == 5:
+        weekDay = 'S'
+    elif dateTime[3] == 6:
+        weekDay = 'U'
+    hour = str(dateTime[4]+utc)
+    if len(hour) == 1:
+        hour = '0' + hour
+    minute = str(dateTime[5])
+    if len(minute) == 1:
+        minute = '0' + minute
+    sec = str(dateTime[6])
+    if len(sec) == 1:
+        sec = '0' + sec
+    usec = str(dateTime[7])
+    if len(usec) == 2:
+        usec = '0' + usec
+    elif len(usec) == 1:
+        usec = "00" + usec
+
+    dt = year + '-' + month + '-' + date + weekDay + hour + ':' + minute + ':' + sec + '.' + usec + 'Z'   # print vals
+
     try: # Check for sensor Error
         err = False
         temp = s.get_temp_humi()[0]
@@ -40,15 +87,17 @@ while True:
         statHum = "Error"
         temp = "Error"
         humid = "Error"
-        if not ton: # Revert immediately to switch timer
+        if not ton  and (min_heat_off == 0 or min_heat_off == 1): # Revert immediately to switch timer
             ton = True
             heaterPin.off()
+            min_heat_off = -1
         else:
             ton = False
             heaterPin.on()
-        if not hon: # Revert immediately to switch timer
+        if not hon and (min_humi_off == 0 or min_humi_off == 5): # Revert immediately to switch timer
             hon = True
             humidiPin.off()
+            min_humi_off = -1
         else:
             hon = False
             humidiPin.on()
@@ -57,22 +106,24 @@ while True:
             iter = 1
         try:
             # WRITE SHT DATA HERE
-            pub_msg("{\"row\" : \"" + str(iter) + "\", \"pos\" : \"0\", \"TempVal\" : \"" + str(temp) + "\"}")
-            pub_msg("{\"row\" : \"" + str(iter) + "\", \"pos\" : \"1\", \"HeatStat\" : \"" + statHeat + "\"}")
-            pub_msg("{\"row\" : \"" + str(iter) + "\", \"pos\" : \"2\", \"HumiVal\" : \"" + str(humid) + "\"}")
-            pub_msg("{\"row\" : \"" + str(iter) + "\", \"pos\" : \"3\", \"HumiStat\" : \"" + statHum + "\"}")
+            pub_msg("{\"postId\" : \"" + str(postId) + "\", \"postDate\" : \"" + str(dt) + "\", \"temp_c\" : 0.0, \"temp_f\" : 32.0, \"humidity\" : 0.0}")
         except:
-            f.write("{\"row\" : \"" + str(iter) + "\", \"pos\" : \"0\", \"TempVal\" : \"" + str(temp) + "\"}\n")
-            f.write("{\"row\" : \"" + str(iter) + "\", \"pos\" : \"1\", \"HeatStat\" : \"" + statHeat + "\"}\n")
-            f.write("{\"row\" : \"" + str(iter) + "\", \"pos\" : \"2\", \"HumiVal\" : \"" + str(humid) + "\"}\n")
-            f.write("{\"row\" : \"" + str(iter) + "\", \"pos\" : \"3\", \"HumiStat\" : \"" + statHum + "\"}\n")
-            time.sleep(3600)
+            f.write("{\"postId\" : \"" + str(postId) + "\", \"postDate\" : \"2000-00-00M00:00.000Z\", \"temp_c\" : 0.0, \"temp_f\" : 32.0, \"humidity\" : 0.0}\n")
+            iter += 1
+            min_heat_off += 1
+            min_humi_off += 1
+            time.sleep(60)
             pass
-        time.sleep(3600)
+        min_heat_off += 1
+        min_humi_off += 1
+        time.sleep(60)
         pass
-    mem = gc.mem_free()
+    temp_f = (temp * 9.0 / 5.0) + 32.0
     tDiff = temp - prevTemp
     hDiff = humid - prevHumi
+
+    # Don't remove, code seems to not work if you remove for some reason. Beats me... ¯\_(ツ)_/¯
+    print("Breakpoint\n")
 
     # Let a run clear before we start writing -> Buffer write protocol
     if not firstRun:
@@ -82,9 +133,10 @@ while True:
                 ton = False
                 heaterPin.on()
             else:
-                if not ton:
+                if not ton  and (min_heat_off == 0 or min_heat_off == 1):
                     ton = True
                     heaterPin.off()
+                    min_heat_off = -1
                 else:
                     ton = False
                     heaterPin.on()
@@ -104,9 +156,10 @@ while True:
                 hon = False
                 humidiPin.on()
             else:
-                if not hon:
+                if not hon and (min_humi_off == 0 or min_humi_off == 5):
                     hon = True
                     humidiPin.off()
+                    min_heat_off = -1
                 else:
                     hon = False
                     humidiPin.on()
@@ -141,27 +194,27 @@ while True:
     firstRun = False
 
     # Iterate
-    iter += 1
     if iter == MAXWRITE + 1:
         iter = 1
+        f.close()
+        os.remove('log.txt')
+        f = open('log.txt', 'w')
+        f.write("{\"postId\" : \"" + str(postId) + "\", \"postDate\" : \"" + str(dt) + "\", \"temp_c\" : 0.0, \"temp_f\" : 32.0, \"humidity\" : 0.0}")
 
     try:
         # WRITE SHT DATA HERE
-        pub_msg("{\"row\" : \"" + str(iter) + "\", \"pos\" : \"0\", \"TempVal\" : \"" + str(temp) + "\"}")
-        pub_msg("{\"row\" : \"" + str(iter) + "\", \"pos\" : \"1\", \"HeatStat\" : \"" + statHeat + "\"}")
-        pub_msg("{\"row\" : \"" + str(iter) + "\", \"pos\" : \"2\", \"HumiVal\" : \"" + str(humid) + "\"}")
-        pub_msg("{\"row\" : \"" + str(iter) + "\", \"pos\" : \"3\", \"HumiStat\" : \"" + statHum + "\"}")
+        pub_msg("{\"postId\" : \"" + str(postId) + "\", \"postDate\" : \"" + str(dt) + "\", \"temp_c\" : " + str(temp) + ", \"temp_f\" : " + str(temp_f) + ", \"humidity\" : " + str(humid) + "}")
     except:
         # Write to log, we can't connect
-        f.write("{\"row\" : \"" + str(iter) + "\", \"pos\" : \"0\", \"TempVal\" : \"" + str(temp) + "\"}\n")
-        f.write("{\"row\" : \"" + str(iter) + "\", \"pos\" : \"1\", \"HeatStat\" : \"" + statHeat + "\"}\n")
-        f.write("{\"row\" : \"" + str(iter) + "\", \"pos\" : \"2\", \"HumiVal\" : \"" + str(humid) + "\"}\n")
-        f.write("{\"row\" : \"" + str(iter) + "\", \"pos\" : \"3\", \"HumiStat\" : \"" + statHum + "\"}\n")
+        f.write("{\"postId\" : \"" + str(postId) + "\", \"postDate\" : \"2000-00-00M00:00.000Z\", \"temp_c\" : " + str(temp) + ", \"temp_f\" : " + str(temp_f) + ", \"humidity\" : " + str(humid) + "}\n")
+        iter += 1
         pass
 
     # Error Sleep Delay
     if not err:
         time.sleep(1)
     else:
-        time.sleep(3600)
+        min_heat_off += 1
+        min_humi_off += 1
+        time.sleep(60)
 f.close()

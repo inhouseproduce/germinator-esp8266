@@ -148,5 +148,15 @@
 ### AWS RDS Connection
     This connection was simply made by porting MQTT to S3
     Updates made logged in changelog.txt
+    
+### Remote Control
+    Has been integrated under futureRelease folder with final delay times.
+    Need to run NodeJS server with dedicated IP port connection and open socket. 
+    Please edit variables only in boot.py
+    Uses ujson and urequest which is a sublibrary of CPython's json and request library
+    Please review
+    Limitations is that ESP8266's Python code has volatile memory, so we will need to still adjust code based on wifi router
+    We will need internet connection for this to work
 
 See release for latest files
+See futureRelease for files with remote control enabled

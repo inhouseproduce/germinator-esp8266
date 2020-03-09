@@ -7,17 +7,19 @@ BR=115200
 TOOL=esptool.py
 PY=ampy
 INS=run.sh
-CERT=Vita.cert.der
-KEY=Vita.key.der
+CERT=Preux.cert.der
+KEY=Preux.key.der
+UUID=uuid.py
 
 default: put run
 
 put:
+	${PY} --port ${PORT} put ${MAIN}
+	${PY} --port ${PORT} put ${BOOT}
 	${PY} --port ${PORT} put ${SHT31_DEP}
 	${PY} --port ${PORT} put ${CERT}
 	${PY} --port ${PORT} put ${KEY}
-	${PY} --port ${PORT} put ${MAIN}
-	${PY} --port ${PORT} put ${BOOT}
+	${PY} --port ${PORT} put ${UUID}
 
 run:
 	${PY} --port ${PORT} run ${MAIN}

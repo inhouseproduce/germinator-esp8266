@@ -46,3 +46,11 @@
 	* boot.py: Updated MQTT to RDS connection 
         * uuid.py: uuid generation for unique identifying string
 
+2020-03-09 Nathan Tjoar <nathan.tjoar@gmail.com>
+
+	* RemoteControl: Practice and sandbox for remote control value 
+			 research
+	* release: Updated new time delays 
+        * RDS: Updated new time delays
+	* futureRelease: Integrated code for remote control
+
