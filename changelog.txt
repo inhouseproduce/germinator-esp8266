@@ -1,56 +1,51 @@
 2020-01-15 Nathan Tjoar <nathan.tjoar@gmail.com>
      
-            * main.py: Pushed beta code to test output 
-            values of temperature sensor
-    
-            * boot.py: Running and initializing pins to 
-            see changes in data
+	* main.py: Pushed beta code to test output values of temperature sensor
+	* boot.py: Running and initializing pins to see changes in data
      
 2020-01-16 Nathan Tjoar <nathan.tjoar@gmail.com>
 
-        * main.py: Updated logic and error vals in code
+	* main.py: Updated logic and error valyess in code
 
 2020-01-20 Nathan Tjoar <nathan.tjoar@gmail.com>
 
-        * main.py: Have code push values and data to MQTT 
-        connection
-        * Germinator-8266.cert.der: Formatted certificate
-        * Germinator-8266.key.der: Formatted private key
-        * Germinator-8266.private.key: Private key for AWS IoT
-        communications
-        * Germinator-8266.cert.pem: Certifacte for AWS IoT
-        communications
+	* main.py: Have code push values and data to MQTT connection
+	* Germinator-8266.cert.der: Formatted certificate
+	* Germinator-8266.key.der: Formatted private key
+	* Germinator-8266.private.key: Private key for AWS IoT communications
+	* Germinator-8266.cert.pem: Certificate for AWS IoT communications
 
 2020-01-27 Nathan Tjoar <nathan.tjoar@gmail.com>
 
-        * main.py: Have code push values and data to database
-        * boot.py: Have initializing to database as well as pin 
-        initialization
+	* main.py: Have code push values and data to database
+	* boot.py: Have initializing to database as well as pin initialization
 
 2020-01-29 Nathan Tjoar <nathan.tjoar@gmail.com>
 
-        * main.py: Added exception and error handling for the 
-	board
-        * boot.py: Fix initialization repeat and added hard file
-	to the ESP8266
+	* main.py: Added exception and error handling for the board
+	* boot.py: Fix initialization repeat and added hard file to the ESP8266
 
 2020-02-06 Nathan Tjoar <nathan.tjoar@gmail.com>
 
-        * main.py: Added additional exception and error handling 
-	for the board
+	* main.py: Added additional exception and error handling for the board
 	* boot.py: Cleaned and removed unnecessary code. 
 
 2020-03-02 Nathan Tjoar <nathan.tjoar@gmail.com>
 
-        * main.py: New JSON parse and data formatting
+	* main.py: New JSON parse and data formatting
 	* boot.py: Updated MQTT to RDS connection 
-        * uuid.py: uuid generation for unique identifying string
+	* uuid.py: uuid generation for unique identifying string
 
 2020-03-09 Nathan Tjoar <nathan.tjoar@gmail.com>
 
-	* RemoteControl: Practice and sandbox for remote control value 
-			 research
+	* RemoteControl: Practice and sandbox for remote control value research
 	* release: Updated new time delays 
-        * RDS: Updated new time delays
+	* RDS: Updated new time delays
 	* futureRelease: Integrated code for remote control
 
+2020-03-11 Nathan Tjoar <nathan.tjoar@gmail.com>
+
+	* main.py: Added comments and fixed timing delay bug
+	* README: Updated to cover new files
+	* boot.py: Marked variables to change and edited to be easier to change
+	* All folders: took out the private keys and certificates

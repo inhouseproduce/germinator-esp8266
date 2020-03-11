@@ -35,34 +35,38 @@ min_humi_off = 0
 utc = -8
 
 while True: 
-    response = urequests.get(addr + ':' + str(port) + '/' + endpoint) # Change Values in Boot
-    data = response.text
-    jsonParse = ujson.loads(data)
-    ssid_new = jsonParse["uuid"]
-    pw_new = jsonParse["password"]
-    minTemp_new = jsonParse["minTemp"]
-    maxTemp_new = jsonParse["maxTemp"]
-    minHumid_new = jsonParse["minHumid"]
-    maxHumid_new = jsonParse["maxHumid"]
-    if WIFI_SSID != ssid_new or WIFI_PW != pw_new:
-        try:
-            connect_wifi(ssid_new, pw_new)
-            WIFI_SSID = ssid_new
-            WIFI_PW = pw_new
-        except:
-            pass
-    if tempLimit != minTemp_new or tMax != maxTemp_new:
-        if minTemp_new < maxTemp_new: # Replace errvals
-            if minTemp_new > terrMin:
-                tempLimit = minTemp_new
-            if maxTemp_new < terrMax:
-                tMax = maxTemp_new
-    if humidLimit != minHumid_new or hMax != maxHumid_new:
-        if minHumid_new < maxHumid_new: # Replace errvals
-            if minHumid_new >= herrMin:
-                humidLimit = minHumid_new
-            if maxHumid_new <= herrMax:
-                hMax = maxHumid_new
+    try: # Get data from server via GET request
+        response = urequests.get(addr + ':' + str(port) + '/' + endpoint) # Change Values in Boot
+        data = response.text 
+        if data != None and data != '':
+            jsonParse = ujson.loads(data)
+            ssid_new = jsonParse["uuid"]
+            pw_new = jsonParse["password"]
+            minTemp_new = jsonParse["minTemp"]
+            maxTemp_new = jsonParse["maxTemp"]
+            minHumid_new = jsonParse["minHumid"]
+            maxHumid_new = jsonParse["maxHumid"]
+            if (WIFI_SSID != ssid_new or WIFI_PW != pw_new) and (WIFI_SSID != None and WIFI_PW != None) and (WIFI_SSID != '' and WIFI_PW != ''):
+                try:
+                    connect_wifi(ssid_new, pw_new)
+                    WIFI_SSID = ssid_new
+                    WIFI_PW = pw_new
+                except:
+                    pass
+            if (tempLimit != minTemp_new or tMax != maxTemp_new)  and (tempLimit != None and tMax != None) and (tempLimit != '' and tMax != ''):
+                if minTemp_new < maxTemp_new: # Replace errvals
+                    if minTemp_new > terrMin:
+                        tempLimit = minTemp_new
+                    if maxTemp_new < terrMax:
+                        tMax = maxTemp_new
+            if (humidLimit != minHumid_new or hMax != maxHumid_new) and (humidLimit != None and hMax != None) and (humidLimit != '' and hMax != ''):
+                if minHumid_new < maxHumid_new: # Replace errvals
+                    if minHumid_new >= herrMin:
+                        humidLimit = minHumid_new
+                    if maxHumid_new <= herrMax:
+                        hMax = maxHumid_new
+    except:
+        pass
     # UUID and TimeDate
     postId = str(uuid.uuid4())
     dateTime = rtc.datetime()
@@ -113,20 +117,20 @@ while True:
         err = True
         temp = "Error"
         humid = "Error"
-        if not ton and (min_heat_off == 0 or min_heat_off == 1): # Revert immediately to switch timer
+        if not ton or (min_heat_off >= 0 and min_heat_off <= 5): # Revert immediately to switch timer
             ton = True
             heaterPin.off()
-            min_heat_off = -1
         else:
             ton = False
             heaterPin.on()
-        if not hon and (min_humi_off == 0 or min_humi_off == 5): # Revert immediately to switch timer
+            min_heat_off = -1
+        if not hon or (min_humi_off >= 0 and min_humi_off <= 5): # Revert immediately to switch timer
             hon = True
             humidiPin.off()
-            min_humi_off = -1
         else:
             hon = False
             humidiPin.on()
+            min_humi_off = -1
         iter += 1
         if iter == MAXWRITE + 1:
             iter = 1
@@ -159,13 +163,13 @@ while True:
                 ton = False
                 heaterPin.on()
             else:
-                if not ton and (min_heat_off == 0 or min_heat_off == 1):
+                if not ton or (min_heat_off >= 0 and min_heat_off <= 1):
                     ton = True
                     heaterPin.off()
-                    min_heat_off = -1
                 else:
                     ton = False
                     heaterPin.on()
+                    min_heat_off = -1
         else: # Normal processing
             if temp < tempLimit and prevTemp < tempLimit: # Turn on
                 heaterPin.off()
@@ -182,13 +186,13 @@ while True:
                 hon = False
                 humidiPin.on()
             else:
-                if not hon and (min_humi_off == 0 or min_humi_off == 5):
+                if not hon or (min_humi_off >= 0 and min_humi_off <= 5):
                     hon = True
                     humidiPin.off()
-                    min_humi_off = -1
                 else:
                     hon = False
                     humidiPin.on()
+                    min_humi_off = -1
         else: # Normal processing
             if humid < humidLimit and prevHumi < humidLimit: # Turn on
                 humidiPin.off()
@@ -200,7 +204,7 @@ while True:
                 humidiPin.on()
                 hon = False
 
-    # Write back debouncer
+    # Look back differential
     prevTemp = temp
     prevHumi = humid
     firstRun = False

@@ -157,7 +157,7 @@
     Please review
     Limitations is that ESP8266's Python code has volatile memory, so we will need to still adjust code based on wifi router
     We will need internet connection for this to work
-    
+
 ### Instructions
     Go to the specific folder you are searching for and run the flash commands above
       Make sure to have your bin file for the specific flash in that folder
@@ -167,6 +167,13 @@
     boot.py will run first, then main.py
     Use the screen command to monitor any progress happening with delays
     Note some of these will have latent start times
+
+### Final notes
+    See changelog for backlog history
+    Most of this is simply pipelining data via RDS, the code should work in general, but heavily dependent
+    Private key and certificates must be generated prior to uploading code and must be on the machine
+    For further security, try to find a way to keep private key and certificate to be off the machine
+    For general purposes, boot.py will handle any and all 
 
 See release for latest files
 See futureRelease for files with remote control enabled

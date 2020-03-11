@@ -11,6 +11,14 @@ import time
 i = machine.I2C(sda=machine.Pin(5), scl=machine.Pin(4))
 s = sht31.SHT31(i)
 
+# 2 Relay Module Pin Init
+heaterPin = machine.Pin(0, machine.Pin.OUT)
+humidiPin = machine.Pin(2, machine.Pin.OUT)
+
+######################################################
+#              VALUES TO EDIT: BEGIN                 #
+######################################################
+
 # Temperature Vals (TRUE)
 tempLimit = 23.0
 tMax = 24.0
@@ -19,35 +27,28 @@ tMax = 24.0
 humidLimit = 90.0
 hMax = 97.0
 
-# # Temperature Vals (FALSE)
-# tempLimit = 30.0
-# tMax = 35.0
-# # Humidity Vals (FALSE)
-# humidLimit = 95.0
-# hMax = 100.0
-
-# 2 Relay Module Pin Init
-heaterPin = machine.Pin(0, machine.Pin.OUT)
-humidiPin = machine.Pin(2, machine.Pin.OUT)
-
 #This works for either ESP8266 ESP32 if you rename certs before moving into /flash 
-CERT_FILE = "Preux.cert.der"
-KEY_FILE = "Preux.key.der"
+CERT_FILE = "CERTNAME.cert.der"
+KEY_FILE = "CERTNAME.key.der"
 
 #if you change the ClientId make sure update AWS policy
 MQTT_CLIENT_ID = "basicPubSub"
 MQTT_PORT = 8883
 
 #topic AWS policy
-MQTT_TOPIC = "germinator/inHouse"
+MQTT_TOPIC = "MQTT_TOPIC"
 
 #Change the following three settings to match your environment
-MQTT_HOST = "a2kteabg9as7b1-ats.iot.us-west-1.amazonaws.com"
+MQTT_HOST = "AWS_ENDPOINT_ADDRESS-ats.iot.us-west-1.amazonaws.com"
 WIFI_SSID = "inHouse_24GHz"
 WIFI_PW = "P@$$word"
-addr = 'http://localhost'
+addr = 'http://DNS_NAME'
 port = 8081
-endpoint = 'test'
+endpoint = 'ENDPOINT'
+
+######################################################
+#               VALUES TO EDIT: END                  #
+######################################################
 
 mqtt_client = None
 
