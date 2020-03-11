@@ -7,8 +7,8 @@ BR=115200
 TOOL=esptool.py
 PY=ampy
 INS=run.sh
-CERT=Vita.cert.der
-KEY=Vita.key.der
+CERT=CERT_FILE.cert.der
+KEY=KEY_FILE.key.der
 
 default: put run
 

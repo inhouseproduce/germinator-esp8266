@@ -87,20 +87,20 @@ while True:
         statHum = "Error"
         temp = "Error"
         humid = "Error"
-        if not ton  and (min_heat_off == 0 or min_heat_off == 1): # Revert immediately to switch timer
+        if not ton or (min_heat_off >= 0 and min_heat_off <= 5): # Revert immediately to switch timer
             ton = True
             heaterPin.off()
-            min_heat_off = -1
         else:
             ton = False
             heaterPin.on()
-        if not hon and (min_humi_off == 0 or min_humi_off == 5): # Revert immediately to switch timer
+            min_heat_off = -1
+        if not hon or (min_humi_off >= 0 and min_humi_off <= 1): # Revert immediately to switch timer
             hon = True
             humidiPin.off()
-            min_humi_off = -1
         else:
             hon = False
             humidiPin.on()
+            min_humi_off = -1
         iter += 1
         if iter == MAXWRITE + 1:
             iter = 1
@@ -133,13 +133,13 @@ while True:
                 ton = False
                 heaterPin.on()
             else:
-                if not ton  and (min_heat_off == 0 or min_heat_off == 1):
+                if not ton or (min_heat_off >= 0 and min_heat_off <= 5):
                     ton = True
                     heaterPin.off()
-                    min_heat_off = -1
                 else:
                     ton = False
                     heaterPin.on()
+                    min_heat_off = -1
         else: # Normal processing
             if temp < tempLimit and prevTemp < tempLimit: # Turn on
                 heaterPin.off()
@@ -156,13 +156,13 @@ while True:
                 hon = False
                 humidiPin.on()
             else:
-                if not hon and (min_humi_off == 0 or min_humi_off == 5):
+                if not hon or (min_humi_off >= 0 and min_humi_off <= 1):
                     hon = True
                     humidiPin.off()
-                    min_heat_off = -1
                 else:
                     hon = False
                     humidiPin.on()
+                    min_heat_off = -1
         else: # Normal processing
             if humid < humidLimit and prevHumi < humidLimit: # Turn on
                 humidiPin.off()
