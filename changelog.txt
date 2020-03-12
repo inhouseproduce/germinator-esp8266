@@ -49,3 +49,9 @@
 	* README: Updated to cover new files
 	* boot.py: Marked variables to change and edited to be easier to change
 	* All folders: took out the private keys and certificates
+
+2020-03-12 Nathan Tjoar <nathan.tjoar@gmail.com>
+
+	* release: Added comments and cleaned up code more
+	* futureRelease: Added comments and cleaned up code more
+	* README: Clarified instructions

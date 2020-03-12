@@ -164,7 +164,8 @@
     Go to the folder you are searching for
       Refer to the notes for any prerequisites you may need to do before building the data
     Put all your build files into the ESP8266 using the put commands
-    boot.py will run first, then main.py
+    For release, this will include all .py files
+        boot.py will run first, then main.py
     Use the screen command to monitor any progress happening with delays
     Note some of these will have latent start times
 

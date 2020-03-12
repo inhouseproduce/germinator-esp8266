@@ -8,7 +8,7 @@ from umqtt.robust import MQTTClient
 import time
 
 # SHT31 Pin Init
-i = machine.I2C(sda=machine.Pin(5), scl=machine.Pin(4))
+i = machine.I2C(sda=machine.Pin(5), scl=machine.Pin(4)) # Found tutorials saying to flip these, but worked before...
 s = sht31.SHT31(i)
 
 # 2 Relay Module Pin Init
@@ -27,7 +27,7 @@ tMax = 24.0
 humidLimit = 90.0
 hMax = 97.0
 
-#This works for either ESP8266 ESP32 if you rename certs before moving into /flash 
+#This works for either ESP8266 ESP32 if you rename certs before moving into board
 CERT_FILE = "CERTNAME.cert.der"
 KEY_FILE = "CERTNAME.key.der"
 
@@ -38,11 +38,10 @@ MQTT_PORT = 8883
 #topic AWS policy
 MQTT_TOPIC = "MQTT_TOPIC"
 
-#Change the following three settings to match your environment
+#Change the following settings to match your environment
 MQTT_HOST = "AWS_ENDPOINT_ADDRESS-ats.iot.us-west-1.amazonaws.com"
 WIFI_SSID = "inHouse_24GHz"
 WIFI_PW = "P@$$word"
-addr = 'http://DNS_NAME'
 port = 8081
 endpoint = 'ENDPOINT'
 

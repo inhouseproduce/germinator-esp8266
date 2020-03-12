@@ -9,6 +9,7 @@ PY=ampy
 INS=run.sh
 CERT=CERT_FILE.cert.der
 KEY=KEY_FILE.key.der
+UUID=uuid.py
 
 default: put run
 
@@ -18,6 +19,7 @@ put:
 	${PY} --port ${PORT} put ${KEY}
 	${PY} --port ${PORT} put ${MAIN}
 	${PY} --port ${PORT} put ${BOOT}
+	${PY} --port ${PORT} put ${UUID}
 
 run:
 	${PY} --port ${PORT} run ${MAIN}

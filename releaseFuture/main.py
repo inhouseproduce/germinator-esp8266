@@ -10,12 +10,6 @@ terrMax = 27.0
 herrMin = 0.0
 herrMax = 100.0
 
-# # Failover Limit (FALSE)
-# terrMin = 0.0
-# terrMax = 40.0
-# herrMin = 0.0
-# herrMax = 100.0
-
 # Helper Variables
 prevTemp = 0.0
 prevHumi = 0.0
