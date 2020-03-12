@@ -31,18 +31,18 @@ heaterPin = machine.Pin(0, machine.Pin.OUT)
 humidiPin = machine.Pin(2, machine.Pin.OUT)
 
 #This works for either ESP8266 ESP32 if you rename certs before moving into /flash 
-CERT_FILE = "Preux.cert.der"
-KEY_FILE = "Preux.key.der"
+CERT_FILE = "CERTNAME.cert.der"
+KEY_FILE = "KEYNAME.key.der"
 
 #if you change the ClientId make sure update AWS policy
 MQTT_CLIENT_ID = "basicPubSub"
 MQTT_PORT = 8883
 
 #topic AWS policy
-MQTT_TOPIC = "germinator/inHouse"
+MQTT_TOPIC = "MQTT_TOPIC"
 
 #Change the following three settings to match your environment
-MQTT_HOST = "a2kteabg9as7b1-ats.iot.us-west-1.amazonaws.com"
+MQTT_HOST = "AWS_ENDPOINT_ADDRESS-ats.iot.REGION.amazonaws.com"
 WIFI_SSID = "inHouse_24GHz"
 WIFI_PW = "P@$$word"
 

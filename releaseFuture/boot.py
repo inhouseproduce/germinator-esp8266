@@ -39,7 +39,7 @@ MQTT_PORT = 8883
 MQTT_TOPIC = "MQTT_TOPIC"
 
 #Change the following settings to match your environment
-MQTT_HOST = "AWS_ENDPOINT_ADDRESS-ats.iot.us-west-1.amazonaws.com"
+MQTT_HOST = "AWS_ENDPOINT_ADDRESS-ats.iot.REGION.amazonaws.com"
 WIFI_SSID = "inHouse_24GHz"
 WIFI_PW = "P@$$word"
 addr = 'http://DNS_NAME'

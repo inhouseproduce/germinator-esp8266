@@ -1,4 +1,4 @@
-import machine
+ import machine
 import sht31
 
 #AWS MQTT client cert example for esp8266 or esp32 running MicroPython 1.9 
@@ -30,18 +30,18 @@ heaterPin = machine.Pin(0, machine.Pin.OUT)
 humidiPin = machine.Pin(2, machine.Pin.OUT)
 
 #This works for either ESP8266 ESP32 if you rename certs before moving into /flash 
-CERT_FILE = "Germinator-8266.cert.der"
-KEY_FILE = "Germinator-8266.key.der"
+CERT_FILE = "CERTNAME.cert.der"
+KEY_FILE = "KEYNAME.key.der"
 
 #if you change the ClientId make sure update AWS policy
 MQTT_CLIENT_ID = "basicPubSub"
 MQTT_PORT = 8883
 
 #if you change the topic make sure update AWS policy
-MQTT_TOPIC = "sdk/test/Python"
+MQTT_TOPIC = "MQTT_TOPIC"
 
 #Change the following three settings to match your environment
-MQTT_HOST = "a2kteabg9as7b1-ats.iot.us-west-1.amazonaws.com"
+MQTT_HOST = "AWS_ENDPOINT_ADDRESS-ats.iot.REGION.amazonaws.com"
 WIFI_SSID = "TP-Link_33C4"
 WIFI_PW = "nasturtium"
 
