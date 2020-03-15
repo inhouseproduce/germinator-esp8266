@@ -4,6 +4,8 @@
   Connect GPIO Pin 4 to scl
   Connect GPIO Pin 5 to sda
 
+*may need to replace "ttyUSB0" with "cu.SLAB_USBtoUART"
+
 ### Flash Board
     esptool.py --port /dev/ttyUSB0 erase_flash
     esptool.py --port /dev/ttyUSB0 --baud 115200 write_flash --flash_size=detect 0 esp8266-lastUpdateLabel.bin
@@ -30,6 +32,8 @@
     brew install cmake ninja
     brew install ccache
     sudo pip3 install adafruit-circuitpython-sht31d
+    
+    *may need to include tools in .bash_profile to work
 
 ### Files
     README.md: Informational document containing all updates
